@@ -1,0 +1,19 @@
+name: some_other_action
+
+on:
+  pull_request:
+    branches:
+      - '**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: 'read'
+
+jobs:
+  do-something:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello World"
